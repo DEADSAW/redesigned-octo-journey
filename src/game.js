@@ -76,15 +76,18 @@ export class Game {
             // Pulsing effect
             const pulse = 0.5 + Math.sin(Date.now() * 0.003) * 0.3;
             
-            ctx.font = 'bold 28px monospace';
-            ctx.fillStyle = `rgba(0, 255, 255, ${pulse})`;
-            ctx.textAlign = 'center';
-            ctx.fillText('CLICK TO START', width / 2, height / 2);
+            // Draw a pulsing visual cue (no text instructions per spec)
+            ctx.beginPath();
+            ctx.arc(width / 2, height / 2, 30 + pulse * 10, 0, Math.PI * 2);
+            ctx.strokeStyle = `rgba(0, 255, 255, ${pulse})`;
+            ctx.lineWidth = 3;
+            ctx.stroke();
             
-            ctx.font = '16px monospace';
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
-            ctx.fillText('WASD or Arrow Keys to move', width / 2, height / 2 + 50);
-            ctx.fillText('Auto-fire enabled • Dodge enemies • Survive', width / 2, height / 2 + 80);
+            // Inner circle
+            ctx.beginPath();
+            ctx.arc(width / 2, height / 2, 15, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(0, 255, 255, ${pulse * 0.5})`;
+            ctx.fill();
             
             requestAnimationFrame(animate);
         };
@@ -425,16 +428,20 @@ export class Game {
         const width = this.canvas.width;
         const height = this.canvas.height;
         
-        // Pulsing effect
+        // Pulsing effect (no text per spec)
         const pulse = 0.5 + Math.sin(Date.now() * 0.003) * 0.3;
         
-        ctx.font = '24px monospace';
-        ctx.fillStyle = `rgba(255, 255, 255, ${pulse})`;
-        ctx.textAlign = 'center';
-        ctx.fillText('CLICK TO START', width / 2, height / 2);
+        // Draw a pulsing visual cue
+        ctx.beginPath();
+        ctx.arc(width / 2, height / 2, 30 + pulse * 10, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(255, 255, 255, ${pulse})`;
+        ctx.lineWidth = 3;
+        ctx.stroke();
         
-        ctx.font = '14px monospace';
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
-        ctx.fillText('WASD or Arrow Keys to move', width / 2, height / 2 + 40);
+        // Inner circle
+        ctx.beginPath();
+        ctx.arc(width / 2, height / 2, 15, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${pulse * 0.5})`;
+        ctx.fill();
     }
 }
